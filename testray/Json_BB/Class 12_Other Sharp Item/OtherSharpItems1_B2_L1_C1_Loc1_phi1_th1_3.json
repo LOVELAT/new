@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Other Sharp Item",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    228,
+                    58
+                ],
+                [
+                    292,
+                    176
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "OtherSharpItems1_B2_L1_C1_Loc1_phi1_th1_3.jpg",
+    "imageHeight": 291,
+    "imageWidth": 581
+}

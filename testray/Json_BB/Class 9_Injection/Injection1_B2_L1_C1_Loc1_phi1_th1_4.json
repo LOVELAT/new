@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Syringe",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    385,
+                    192
+                ],
+                [
+                    509,
+                    205
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Injection1_B2_L1_C1_Loc1_phi1_th1_4.jpg",
+    "imageHeight": 508,
+    "imageWidth": 662
+}

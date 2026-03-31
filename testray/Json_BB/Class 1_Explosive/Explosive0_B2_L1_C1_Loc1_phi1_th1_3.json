@@ -1,0 +1,55 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Explosive",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    174,
+                    122
+                ],
+                [
+                    448,
+                    231
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "Battery",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    325,
+                    125
+                ],
+                [
+                    378,
+                    160
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Explosive0_B2_L1_C1_Loc1_phi1_th1_3.jpg",
+    "imageHeight": 329,
+    "imageWidth": 593
+}

@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test deep reasoning about threat classification and object enumeration using only the provided metadata. The case explicitly states: (1) the sample is from class 'Class 11_Nail Cutter' with threat level 'threat'; (2) there is exactly 1 annotated object, labeled \"Nail Cutter\"; (3) the caption and figure description confirm the presence of one nail cutter, partially obscured by spoons, plus other benign items (metal mounts, a steel teaspoon, normal passenger items). No other suspicious objects are mentioned or annotated. The challenge is to distinguish between *annotated* threat objects vs. *all visible metal items*, and to verify that the threat classification is based on the single annotated object. A difficult question would require recognizing that despite multiple metallic items being visible, only one is annotated and classified as a threat—and that the threat level is explicitly given as 'threat', not inferred.",
+  "question": "Based on the provided testray case metadata and Figure 1a, which of the following statements is *objectively verifiable* regarding the security assessment of the X-ray image?\n\nA) There are three threat objects: the nail cutter, the metal mounts, and the metallic steel teaspoon.  \nB) The nail cutter is classified as non-threat because it is partially obscured by spoons.  \nC) Exactly one object is annotated and designated as a threat: the Nail Cutter.  \nD) The presence of metal mounts and a steel teaspoon elevates the overall threat level beyond 'threat'.  \nE) Two suspicious objects are present: the nail cutter and the stacked spoons (due to density overlap).  \nF) The annotation count (1) contradicts the visual evidence in Figure 1a, which shows at least four distinct metallic items.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The case metadata explicitly states:  \n- `history`: “class 'Class 11_Nail Cutter' with threat level 'threat'”  \n- `image_finding`: “1 annotated object(s); labels: Nail Cutter”  \n- `diagnosis`: “Nail Cutter”  \n- `labels`: “Nail Cutter”  \n- `object_count`: 1  \n- `annotations`: one entry with label=Nail Cutter and bounding box coordinates  \n- `caption` and `Figure 1a` description confirm only the nail cutter is identified as the target object; other items (spoons, metal mounts, teaspoon) are described as “normal passenger items” or incidental.  \nThus, only option C is fully supported: exactly one object is annotated and designated as a threat—the Nail Cutter. All other options introduce unsupported inferences (e.g., threat status of spoons/mounts/teaspoon, contradiction claims, or counting unannotated items as threats).",
+  "answer": "C",
+  "metadata": {
+    "case_id": 9,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "enumeration",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Nail Cutter",
+    "threat_level": "threat"
+  }
+}

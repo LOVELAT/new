@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test deep reasoning about object classification and enumeration using only the provided metadata. The case explicitly states two annotated objects: \"Explosive\" and \"Battery\", with precise bounding boxes. The caption and figure reference describe a horizontally set explosive device *with* metal mounts and a metallic egg beater—but crucially, those items (metal mounts, egg beater) are *not* annotated as separate labeled objects; only two annotations exist. The threat class is 'Class 1_Explosive', and diagnosis confirms both labels. A difficult question should force the examinee to distinguish between *described* items in the caption vs. *annotated* objects in the metadata—i.e., the egg beater and metal mounts are mentioned but not labeled, so they do not count toward object_count=2. Also, the Battery is co-located within the explosive device’s bounding region (x_min 174–176 overlap), suggesting integration, but per rules, we treat annotations as discrete labeled entities. The correct answer must reflect that only two objects are annotated, both classified as threat-relevant (Explosive is direct threat; Battery may be part of IED power source, and in this context, the case treats it as part of the threat ensemble—though strictly, classification is based on label presence, and both are listed in diagnosis). To increase difficulty: include distractors that conflate described items (egg beater, mounts) with annotated ones, or misattribute counts.",
+  "question": "Based on the provided testray case metadata for Figure 1a, which of the following statements is *objectively verifiable* regarding the annotated objects and their security classification?  \nA) There are three threat objects: Explosive, Battery, and Metallic Egg Beater.  \nB) The annotation count is 3, including metal mounts as a separate labeled object.  \nC) Exactly two objects are annotated—Explosive and Battery—and both are listed in the diagnosis, consistent with the threat-level classification.  \nD) The Battery is a non-threat item because it appears outside the Explosive bounding box.  \nE) The metallic egg beater is annotated with label \"Metal\" and contributes to the threat assessment.  \nF) Object_count=2 refers only to non-threat items; the Explosive is uncounted due to being a device, not an object.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The metadata explicitly states object_count=2, and annotations list exactly two entries: label=Explosive (coords 176–304, 83–299) and label=Battery (174–206, 136–194). The diagnosis field lists \"Battery, Explosive\", confirming both are recognized in the analysis. The caption mentions \"metal mounts\" and \"metallic egg beater\", but no annotations or labels exist for them—so they are descriptive context only, not counted objects. Option C is the only one fully supported: two annotated objects, both in diagnosis, and the case history confirms threat level 'threat' for Class 1_Explosive. Options A, B, E falsely add unannotated items; D is incorrect because Battery’s coordinates overlap with Explosive’s (x_min 174 vs 176), and regardless, diagnosis includes it as part of the finding; F contradicts object_count=2 and diagnosis.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 2,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "enumeration",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

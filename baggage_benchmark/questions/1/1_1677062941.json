@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test precise localization and detection using only provided metadata. The case specifies two annotated objects: Explosive (x_min=147, y_min=65, x_max=433, y_max=168) and Battery (x_min=220, y_min=136, x_max=275, y_max=168). The Explosive is described as horizontally positioned in the middle of the bag, with metal mounts and a metallic egg beater nearby. The Battery lies fully within the Explosive’s bounding box vertically (y=136–168 vs. Explosive y=65–168) and horizontally overlaps (x=220–275 within 147–433), indicating it is embedded or adjacent inside the IED assembly. The figure caption confirms the IED is central and horizontal. A difficult question should require distinguishing spatial containment/overlap using exact coordinates, not just presence/absence. Options must include plausible distractors based on misinterpretations of overlap, layering, or object identity—but only one option matches the verifiable coordinate relationship.",
+  "question": "Based on the annotations in the X-ray image (Figure 1a), which of the following accurately describes the spatial relationship between the labeled Battery and Explosive objects?  \nA) The Battery is entirely outside the Explosive’s bounding box, located to the left and above it.  \nB) The Battery is partially overlapping the Explosive’s bounding box on the right side, but its top edge is above the Explosive’s top edge.  \nC) The Battery is fully contained within the Explosive’s bounding box both horizontally and vertically.  \nD) The Battery lies entirely below the Explosive, with no vertical overlap.  \nE) The Battery and Explosive are disjoint, separated by at least 10 pixels in both x and y directions.  \nF) The Battery’s bounding box shares only the bottom edge with the Explosive’s bounding box (y_max = 168 for both), but has no horizontal overlap.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "From annotations: Explosive bbox = [x:147–433, y:65–168]; Battery bbox = [x:220–275, y:136–168]. Horizontally: 220 ≥ 147 and 275 ≤ 433 → full horizontal containment. Vertically: 136 ≥ 65 and 168 ≤ 168 → full vertical containment (Battery’s y_max equals Explosive’s y_max, so it is included). Thus, Battery is fully contained within Explosive’s bbox. This is objectively verifiable from the provided coordinate fields and matches option C. All other options contradict the coordinate data: A, B, D, E, F all assert non-containment, partial overlap, separation, or edge-only contact, none of which hold.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "localization",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

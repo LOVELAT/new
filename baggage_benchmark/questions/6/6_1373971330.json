@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test deep reasoning about threat classification and object enumeration using only the provided metadata. The case explicitly states: (1) it is a 'Class 10_Battery' sample with threat level 'threat'; (2) exactly 1 annotated object, labeled 'Battery'; (3) the caption and figure description confirm one battery, half-covered by spoons, with other benign items (metal mounts, steel teaspoon, normal passenger items). No other threats or batteries are mentioned. The challenge is to avoid distractors that *sound plausible* (e.g., counting spoons or metal items as threats) but are unsupported by annotations or labels. The correct answer must align with both the explicit threat designation and the single annotated object count.",
+  "question": "Based on the provided testray case metadata and Figure 1a, which of the following statements is *objectively verifiable* regarding the security assessment and object enumeration in the X-ray image?  \nA) There are two threat objects: the battery and the metallic steel teaspoon.  \nB) The battery is classified as non-threat because it is partially obscured by spoons.  \nC) Exactly one annotated object is present, labeled \"Battery\", and the case is designated as threat-level \"threat\".  \nD) Three suspicious items are identified: the battery, the stacked spoons, and the metal mounts.  \nE) The annotation coordinates (x_min=175, y_min=244, x_max=236, y_max=291) correspond to the metallic steel teaspoon, not the battery.  \nF) The case belongs to Class 10_Battery but is labeled non-threat due to contextual shielding by spoons.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The metadata explicitly states:  \n- history: \"Class 10_Battery\" with threat level \"threat\".  \n- image_finding: \"1 annotated object(s); labels: Battery\".  \n- diagnosis: \"Battery\".  \n- labels: \"Battery\".  \n- object_count: \"1\".  \n- annotations: only one entry with label=Battery and given coordinates.  \nThe caption and Figure 1a description mention spoons, metal mounts, and a steel teaspoon, but none are annotated or labeled as threats; they are described as \"other normal passenger items\" or benign components. Options A, D, E, and F contradict the explicit labels, object count, or threat designation. Option B contradicts the stated threat level. Only option C precisely matches all verifiable facts.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 6,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "enumeration",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Battery",
+    "threat_level": "threat"
+  }
+}

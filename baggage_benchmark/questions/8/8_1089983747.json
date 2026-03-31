@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test detection, localization, and reasoning using only provided metadata. The case confirms one annotated object: a Battery (label=Battery), with bounding box (x_min=110, y_min=84, x_max=180, y_max=137). The caption and figure description state the battery is horizontal, in the middle of luggage, half covered by stacked spoons, alongside metal mounts and a metallic steel teaspoon. No other prohibited objects are mentioned; “Battery” is the sole diagnosis and label. The challenge is to distinguish correct localization and threat identification from plausible distractors that misuse or misinterpret the metadata (e.g., conflating spoons with threats, misassigning coordinates, or inventing objects). Options must include subtle errors: wrong coordinates, misidentified objects (e.g., “spoon” as threat), incorrect layer/bag, or false claims about full visibility. Only one option can match *all* verifiable facts: presence of exactly one Battery, its coordinates, its partial occlusion by spoons, and its classification as threat.",
+  "question": "Based on the X-ray scan in Figure 1a and the provided annotations, which statement accurately describes the prohibited item’s presence, location, and context?  \nA) A metallic steel teaspoon is identified as the sole prohibited object, located at (x_min=110, y_min=84, x_max=180, y_max=137), fully visible and unobstructed.  \nB) Two batteries are present: one fully visible at (110,84,180,137) and another hidden under metal mounts; both labeled “Battery”.  \nC) One Battery is present, annotated at (x_min=110, y_min=84, x_max=180, y_max=137), horizontally oriented in the middle of the luggage, half covered by stacked spoons, with no other prohibited items.  \nD) A metal mount is classified as a threat, overlapping the battery’s bounding box, and the battery itself is labeled “Normal Item”.  \nE) The battery is vertically oriented, fully exposed, and located near the top-left corner of the image (coordinates not matching annotation).  \nF) Three prohibited objects are detected: Battery, spoon cluster, and steel teaspoon, all with threat level ‘threat’.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The case metadata explicitly states:  \n- object_count = 1  \n- labels = [\"Battery\"]  \n- diagnosis = \"Battery\"  \n- annotations: label=Battery; x_min=110, y_min=84, x_max=180, y_max=137  \n- caption/figure description: “battery placed horizontally, in the middle of a luggage, with the battery half covered by spoons stacked together”, and “other items like metal mounts and one metallic steel teaspoon” (explicitly *not* labeled as threats).  \nOnly option C matches all these facts: single Battery, correct coordinates, horizontal orientation, middle location, partial occlusion by spoons, and no other prohibited items. All other options contradict object_count, labels, annotations, or caption (e.g., A mislabels teaspoon as prohibited; B invents second battery; D misattributes threat to mount; E contradicts orientation and position; F invents three threats).",
+  "answer": "C",
+  "metadata": {
+    "case_id": 8,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "localization",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Battery",
+    "threat_level": "threat"
+  }
+}

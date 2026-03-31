@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test precise localization and detection using only the provided metadata. The case specifies two annotated objects: Explosive (x_min=147, y_min=65, x_max=433, y_max=168) and Battery (x_min=220, y_min=136, x_max=275, y_max=168). The Explosive is described as horizontally positioned in the middle of the bag, and the Battery lies entirely within the vertical span (y=136–168) and horizontal span (x=220–275) of the Explosive’s bounding box (y=65–168, x=147–433), meaning the Battery is spatially nested *inside* the Explosive’s bounding region. This nesting is critical for reasoning. The figure caption confirms the IED is central with metal mounts and a metallic egg beater—but those are not labeled, so only the two labeled objects can be referenced. A difficult question should require comparing coordinates to infer containment or relative position, not just recall.",
+  "question": "Based on the bounding-box coordinates in the annotations for Figure 1a, which of the following statements is objectively true about the spatial relationship between the labeled objects?  \nA) The Battery is located entirely outside the Explosive’s bounding box in both x and y dimensions.  \nB) The Battery overlaps the Explosive only in the x-dimension but not in the y-dimension.  \nC) The Battery is fully contained within the Explosive’s bounding box in both x and y dimensions.  \nD) The Explosive is fully contained within the Battery’s bounding box.  \nE) The Battery and Explosive share no overlapping pixels but are adjacent horizontally.  \nF) The Battery lies above the Explosive in the image frame.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "From annotations: Explosive bbox = [x:147–433, y:65–168]; Battery bbox = [x:220–275, y:136–168]. Check containment:  \n- x: 220 ≥ 147 and 275 ≤ 433 → Battery x-range ⊂ Explosive x-range  \n- y: 136 ≥ 65 and 168 ≤ 168 → Battery y-range ⊂ Explosive y-range (upper bound inclusive)  \nThus, Battery is fully contained within Explosive’s bbox. This is verifiable solely from the provided annotation coordinates and requires precise coordinate reasoning—no inference beyond metadata is used.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "localization",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

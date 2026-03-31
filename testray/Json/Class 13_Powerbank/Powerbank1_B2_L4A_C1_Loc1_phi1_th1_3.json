@@ -1,0 +1,82 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Powerbank",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    231,
+                    122
+                ],
+                [
+                    233,
+                    124
+                ],
+                [
+                    256,
+                    205
+                ],
+                [
+                    256,
+                    211
+                ],
+                [
+                    254,
+                    216
+                ],
+                [
+                    203,
+                    223
+                ],
+                [
+                    198,
+                    220
+                ],
+                [
+                    195,
+                    216
+                ],
+                [
+                    193,
+                    210
+                ],
+                [
+                    176,
+                    131
+                ],
+                [
+                    177,
+                    128
+                ],
+                [
+                    181,
+                    127
+                ],
+                [
+                    224,
+                    122
+                ]
+            ],
+            "shape_type": "polygon",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Powerbank1_B2_L4A_C1_Loc1_phi1_th1_3.jpg",
+    "imageHeight": 296,
+    "imageWidth": 614
+}

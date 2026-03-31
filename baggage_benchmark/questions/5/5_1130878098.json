@@ -1,0 +1,31 @@
+{
+  "thoughts": "The question must test deep reasoning about threat classification, risk assessment, and decision-making using only the provided metadata. The case explicitly states the sample is from class 'Class 10_Battery' with threat level 'threat', and the diagnosis/labels confirm \"Battery\". The figure caption (Figure 1a) adds critical context: the battery is horizontally placed, half-covered by stacked spoons, alongside metal mounts and a metallic steel teaspoon—objects that may obscure or complicate detection. Since batteries (especially lithium) are regulated items and this is labeled a *threat*, the correct answer must reflect that classification *despite* partial obscuration. Risk assessment must consider the combination: battery + conductive metal objects (spoons, mounts, teaspoon) increases short-circuit/fire risk. The follow-up action should be highest-tier screening (e.g., physical inspection), not just alarm or auto-clear. All six options must be plausible but only one fully consistent with *all* metadata: threat class, battery label, obscuration, and presence of conductive metals.",
+  "question": "Based on the X-ray image in Figure 1a—which shows a horizontally oriented battery partially obscured by stacked spoons, alongside metal mounts and a metallic steel teaspoon—and given the case metadata identifying this as a 'Class 10_Battery' sample with explicit threat level 'threat', diagnosis 'Battery', and single annotated object (Battery, coords 387–456 × 109–157), which of the following most accurately describes the security classification, operational risk, and required screening action?\n\nA) Non-threat; low risk due to partial obscuration; recommend auto-clear  \nB) Threat; moderate risk because battery is shielded but inert; recommend secondary X-ray only  \nC) Threat; high risk due to battery combined with conductive metal objects (spoons, mounts, teaspoon) increasing short-circuit potential; require physical inspection  \nD) Uncertain; insufficient visibility to classify; recommend CT scan for confirmation  \nE) Non-threat; battery is consumer-grade and fully compliant; recommend alarm review only  \nF) Threat; low risk because spoons provide shielding; recommend manual override without inspection",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The case metadata explicitly states: \"threat level 'threat'\", \"diagnosis: Battery\", and \"labels: Battery\". The figure caption confirms the presence of conductive metal objects (spoons, metal mounts, metallic steel teaspoon) in proximity to the battery. Lithium batteries combined with conductive metals pose a documented high-risk scenario for short-circuiting and thermal runaway. Rule 2 prohibits inventing objects—only those listed (battery, spoons, mounts, teaspoon) are present. Option C is the only one that correctly integrates all three target capabilities: (1) classification = threat (per metadata), (2) risk = high (due to battery + conductive metals, per caption), and (3) action = physical inspection (standard protocol for confirmed threats with obscured/high-risk combinations). All other options contradict explicit metadata (e.g., A, E, F claim non-threat or low risk; D claims uncertainty despite clear labeling; B underestimates risk).",
+  "answer": "C",
+  "metadata": {
+    "case_id": 5,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "risk_assessment",
+      "decision",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Battery",
+    "threat_level": "threat"
+  }
+}

@@ -1,0 +1,55 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Bullet",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    768,
+                    301
+                ],
+                [
+                    802,
+                    313
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        },
+        {
+            "label": "3D printed gun",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    585,
+                    296
+                ],
+                [
+                    813,
+                    405
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "3DGun+Bullets1_B2_L1_C1_Loc1_phi1_th1_2.jpg",
+    "imageHeight": 480,
+    "imageWidth": 891
+}

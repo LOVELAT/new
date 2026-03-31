@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Blade",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    410,
+                    178
+                ],
+                [
+                    456,
+                    195
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "ShavingBlade1_B11_L1_C1_Loc1_phi1_th1_3.jpg",
+    "imageHeight": 356,
+    "imageWidth": 566
+}

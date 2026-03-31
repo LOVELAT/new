@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must test precise localization and spatial reasoning using only the provided metadata. The annotation gives exact bounding box coordinates (x_min=387, y_min=109, x_max=456, y_max=157) for the Battery. The caption and figure description state the battery is \"set horizontally, in the center of a luggage\" and \"half covered by spoons stacked together\". To create a difficult MCQ, I will construct options that mix plausible but incorrect spatial relationships (e.g., fully covered, left/right half covered, top/bottom), while only one option matches the explicit statement \"half covered by spoons stacked together\" *and* is consistent with the horizontal orientation and central placement. Since no coordinates for spoons are given, the only objectively verifiable fact is the phrase \"half covered\" — not *which* half — but the caption does not specify left/right/top/bottom. However, the bounding box is horizontal (x_min to x_max > y_min to y_max), and the caption says \"battery half covered by spoons stacked together\", implying partial occlusion. Crucially, rule #4 requires the answer to be objectively verifiable from provided fields. The only verifiable spatial fact beyond coordinates is the phrase \"half covered\" — so the correct answer must reflect that exact phrasing without assuming side. But to make it difficult, I’ll include distractors that misattribute coverage (e.g., fully covered, 1/3, etc.) and one that correctly states “half covered” — and since the caption explicitly says “half covered”, that is the only verifiable truth. Options must be six; I will ensure only one matches the literal caption.",
+  "question": "Based on the X-ray image description in Figure 1a and the annotation metadata, which of the following most accurately describes the spatial relationship between the annotated battery and the spoons?  \nA) The battery is fully obscured by the stacked spoons.  \nB) The spoons cover the left third of the battery’s horizontal extent.  \nC) The spoons cover the right two-thirds of the battery.  \nD) The battery is vertically oriented and half-covered at its top edge.  \nE) The battery is horizontally oriented and half-covered by the stacked spoons.  \nF) The spoons lie entirely outside the battery’s bounding box with no overlap.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The caption for Figure 1a explicitly states: “a battery set horizontally, in the center of a luggage, with the battery half covered by spoons stacked together”. The annotation confirms a single horizontally oriented object (x_min=387, x_max=456 → width = 69; y_min=109, y_max=157 → height = 48), supporting horizontal orientation. No coordinates for spoons are provided, so only the qualitative phrase “half covered” is objectively verifiable from the case metadata. Option E precisely mirrors the caption’s wording (“horizontally oriented and half-covered by the stacked spoons”), while all other options introduce unverified specifics (e.g., left third, right two-thirds, top edge, full obscuration, no overlap) not present in the metadata. Thus, E is the only objectively verifiable choice.",
+  "answer": "E",
+  "metadata": {
+    "case_id": 5,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "localization",
+      "relationship",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Battery",
+    "threat_level": "threat"
+  }
+}

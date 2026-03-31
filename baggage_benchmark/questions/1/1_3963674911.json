@@ -1,0 +1,31 @@
+{
+  "thoughts": "The question must test deep integration of metadata: the presence of *both* Explosive and Battery labels, their spatial relationship (Battery fully contained within Explosive bounding box per coordinates), the explicit diagnosis and history identifying this as a Class 1_Explosive threat, and the figure caption confirming an improvised explosive device (IED) with metal mounts and metallic egg beater. A difficult question should require recognizing that the battery is *part of* the IED assembly—not a separate benign item—based on overlap and context, and that this constitutes a high-risk threat requiring immediate escalation. Options must include plausible distractors (e.g., \"non-threat due to battery alone\", \"requires only manual search\", \"low risk because battery is small\") but only one option aligns with the objective evidence: threat classification, high operational risk, and mandatory resolution action per standard protocols for IEDs.",
+  "question": "Based on the X-ray image in Figure 1a and the provided annotations, which of the following statements is *most accurate* regarding the security assessment and required follow-up action for the object configuration shown?\n\nA) The battery is a standalone non-threat item; the explosive is a separate threat, so the bag requires only targeted manual search of the explosive region.  \nB) The presence of a battery adjacent to an explosive lowers the overall risk, making this a medium-risk case requiring secondary screening.  \nC) The battery is fully enclosed within the explosive’s bounding box (x_min=147–433, y_min=65–168 vs. battery x_min=220–275, y_min=136–168), indicating it is integrated into the improvised explosive device, confirming a high-risk threat requiring immediate alarm and bag isolation.  \nD) Since the explosive is described as “improvised” and includes common items like an egg beater, this is a false positive; the correct action is to clear the bag after visual verification.  \nE) The combination of battery and explosive constitutes a low-risk scenario because batteries are permitted in checked baggage, and the explosive label may refer to a training dummy.  \nF) Only the explosive annotation is valid; the battery annotation is redundant and should be ignored, so the threat level is standard for explosives without additional risk factors.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The annotations provide exact coordinates: Explosive spans (147,65) to (433,168); Battery spans (220,136) to (275,168). Since 220 > 147, 275 < 433, 136 > 65, and 168 = 168, the battery is entirely contained within the explosive’s bounding box—indicating physical integration, not co-location. The history explicitly states “Class 1_Explosive” with threat level “threat”, and the diagnosis lists both “Battery, Explosive”. The figure caption confirms an “improvised explosive device” with metal mounts and metallic egg beater—consistent with a functional IED where a battery could serve as a power source. Thus, C is objectively verifiable: integration + threat classification + required action (alarm/isolation) follows standard protocol for confirmed IEDs. All other options contradict the metadata (e.g., E ignores threat level; D contradicts “threat” history; F dismisses explicit diagnosis).",
+  "answer": "C",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "risk_assessment",
+      "decision",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

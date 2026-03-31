@@ -1,0 +1,31 @@
+{
+  "thoughts": "The question must test deep reasoning about threat classification, risk assessment, and decision-making using only the provided metadata. The case explicitly identifies two objects: Explosive and Battery, with the history stating it is a 'Class 1_Explosive' threat. The caption and figure description confirm the explosive device is central, horizontal, and accompanied by metal mounts and a metallic egg beater—both potentially contributing to concealment or structural integration. The annotations show spatial overlap: the Battery (184,214–218,265) lies entirely within the Explosive bounding box (85,94–218,323), indicating physical adjacency or embedding. This co-location of a battery with an explosive is a known high-risk configuration (e.g., power source for detonator). Per ICAO/TSO standards, such a combination triggers immediate threat classification and mandates resolution via CT or manual search—not just alarm escalation. The question should force the examinee to integrate object identity, spatial relationship, class label, and operational protocol without overinterpreting.",
+  "question": "Based on the X-ray image in Figure 1a, which shows an explosive device with metal mounts and a metallic egg beater, and given the annotated objects (Explosive: [85,94,218,323]; Battery: [184,214,218,265]) where the battery is fully contained within the explosive’s bounding box, what is the most appropriate screening follow-up action and why?  \nA) Alarm only—no further action needed, as batteries are common and non-threatening when isolated  \nB) Resolve via automated algorithmic reanalysis, because the system may misclassify metallic egg beaters as threats  \nC) Escalate to secondary screening with CT scan to confirm detonator circuitry, due to battery–explosive co-location indicating potential IED  \nD) Clear the bag—objects are separately labeled and thus not integrated; risk is low  \nE) Request passenger interview only, since no visible wires or initiators are described in the caption  \nF) Flag for manual search but defer CT, as metal mounts alone do not imply functional threat",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The history explicitly states this is a 'Class 1_Explosive' with threat level 'threat'. The annotations confirm two objects: Explosive and Battery, with the Battery’s bounding box fully inside the Explosive’s (x_min=184 ≥ 85, x_max=218 ≤ 218; y_min=214 ≥ 94, y_max=265 ≤ 323), indicating physical integration or proximity consistent with a power source for initiation. The caption mentions “metal mounts” and “metallic egg beater”, which may aid concealment but are secondary to the core threat. Per standard aviation security protocols (e.g., TSA/ICAO), a battery co-located with an explosive constitutes a high-confidence IED indicator, mandating CT or manual resolution—not mere alarm or clearance. Options A, D, E, and F ignore the verified threat class and spatial evidence; B underestimates the certainty of annotation. Only C correctly combines object identity, spatial relationship, and threat classification to justify CT-based resolution.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 4,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "risk_assessment",
+      "decision",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

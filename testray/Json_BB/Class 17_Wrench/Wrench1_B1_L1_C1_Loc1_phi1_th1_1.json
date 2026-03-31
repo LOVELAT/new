@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Wrench",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    227,
+                    121
+                ],
+                [
+                    452,
+                    166
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Wrench1_B1_L1_C1_Loc1_phi1_th1_1.jpg",
+    "imageHeight": 346,
+    "imageWidth": 620
+}

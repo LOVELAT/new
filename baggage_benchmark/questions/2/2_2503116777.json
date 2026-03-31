@@ -1,0 +1,30 @@
+{
+  "thoughts": "To construct a difficult question, I must leverage precise spatial reasoning using the bounding-box coordinates. The two objects—Explosive and Battery—are both annotated with exact pixel coordinates. The Explosive spans x=176–304, y=83–299; the Battery spans x=174–206, y=136–194. Since x_min of Battery (174) is slightly less than x_min of Explosive (176), and x_max of Battery (206) is well within Explosive’s x-range (176–304), the Battery lies *to the left* of the Explosive’s left edge but overlaps horizontally in the region x=176–206. Vertically, Battery y=136–194 lies entirely within Explosive y=83–299. Thus, the Battery is partially overlapping and positioned to the left of the Explosive’s bounding box, but fully contained vertically. The caption mentions the explosive device is “set horizontally, in the center” and includes “metal mounts” and a “metallic egg beater”, but no annotation identifies those—only Explosive and Battery are labeled, so any inference about metal mounts/egg beater must be avoided. The question must test precise localization and overlap reasoning using only the given bbox data. A strong distractor could claim full containment or right-side placement. We’ll ask about the spatial relationship, requiring calculation of overlap and relative position.",
+  "question": "Based on the bounding-box coordinates provided for the annotated objects in Figure 1a, which of the following statements accurately describes the spatial relationship between the Battery and the Explosive?  \nA) The Battery is completely outside the Explosive’s bounding box, with no overlap in x- or y-dimensions.  \nB) The Battery is fully contained within the Explosive’s bounding box and lies entirely to the right of its horizontal center.  \nC) The Battery overlaps the Explosive in both x- and y-dimensions, and its right edge (x=206) lies left of the Explosive’s horizontal center (x=240).  \nD) The Battery is vertically disjoint from the Explosive, with its top edge above the Explosive’s bottom edge.  \nE) The Battery’s left edge (x=174) is to the right of the Explosive’s left edge (x=176), indicating it is fully embedded inside the Explosive’s horizontal span.  \nF) The Battery and Explosive share identical x-coordinates, indicating perfect horizontal alignment.",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "From annotations: Explosive bbox = [x:176–304, y:83–299]; Battery bbox = [x:174–206, y:136–194].  \n- x-overlap: max(176,174)=176 to min(304,206)=206 → overlap exists (width = 30 px).  \n- y-overlap: max(83,136)=136 to min(299,194)=194 → overlap exists (height = 58 px).  \nSo they overlap in both dimensions.  \nExplosive’s horizontal center = (176+304)/2 = 240. Battery’s right edge = 206 < 240 → Battery lies left of Explosive’s center.  \nOption C states exactly this.  \nOption E is false because Battery’s left edge (174) is *left* of Explosive’s left edge (176), not right.  \nOption A, D, F are contradicted by coordinate overlap.  \nOption B is false because Battery is left of center, not right.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 2,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "localization",
+      "relationship",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

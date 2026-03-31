@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Hammer",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    234,
+                    117
+                ],
+                [
+                    453,
+                    196
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Hammer1_B1_L1_C1_Loc1_phi1_th1_1.jpg",
+    "imageHeight": 352,
+    "imageWidth": 606
+}

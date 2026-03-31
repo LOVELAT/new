@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "Pliers",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    225,
+                    155
+                ],
+                [
+                    284,
+                    281
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "Pliers1_B1_L1_C1_Loc1_phi1_th1_2.jpg",
+    "imageHeight": 458,
+    "imageWidth": 420
+}

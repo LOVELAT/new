@@ -1,0 +1,31 @@
+{
+  "thoughts": "The question must test deep reasoning about threat classification, risk assessment, and decision-making using only the provided metadata. The case explicitly states the sample is from class 'Class 11_Nail Cutter' with threat level 'threat', and the diagnosis and labels both confirm \"Nail Cutter\". The figure caption notes the nail cutter is half-covered by stacked spoons and co-located with metal mounts and a metallic steel teaspoon—raising potential occlusion and clutter concerns. However, the object count is 1, and only one annotation exists (Nail Cutter), meaning no additional threats are present. The key challenge is distinguishing whether the presence of other metallic items elevates risk beyond the inherent threat classification of the nail cutter itself. Per rule 4, the answer must be objectively verifiable: the metadata unambiguously states threat level = 'threat', and the object is classified as a nail cutter—a known prohibited item in many jurisdictions (e.g., TSA prohibits nail clippers >4 inches or with blades; but here, the class name and explicit 'threat' label override operational nuance). The most appropriate follow-up action for a confirmed threat object—even partially occluded—is resolution via CT or physical inspection, not alarm dismissal or auto-clear. Option D (\"Resolve via CT scan to confirm blade geometry and assess concealment\") aligns with standard protocol for ambiguous or partially obscured threat items, and is verifiable because: (1) the object is labeled threat, (2) it is partially covered (per caption), and (3) no other threat objects exist (object_count=1), so CT is the logical next step before manual search.",
+  "question": "Given the X-ray image in Figure 1a showing a single annotated object labeled \"Nail Cutter\", which is horizontally placed in the suitcase center and half-covered by stacked spoons, alongside metal mounts and a metallic steel teaspoon—but with no other annotated threats—what is the most appropriate screening follow-up action, considering the officially assigned threat level and object context?\n\nA) Auto-clear the bag as non-threat since only one object is annotated and it’s a common personal item  \nB) Alarm and escalate to manual search immediately due to presence of multiple metallic items  \nC) Reject the image as inconclusive and request rescan without justification\nD) Resolve via CT scan to confirm blade geometry and assess concealment  \nE) Classify as non-threat because the nail cutter is partially obscured and thus unverifiable  \nF) Flag as low-risk and allow passage with passenger interview only",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The case metadata explicitly states: threat level = 'threat', class = 'Class 11_Nail Cutter', diagnosis = 'Nail Cutter', labels = ['Nail Cutter'], object_count = 1, and the caption confirms partial occlusion by spoons. Standard security protocol for a confirmed threat object that is partially obscured (increasing uncertainty about exact dimensions or blade type) mandates resolution via CT scanning before escalation to manual search. Options A, E, and F contradict the explicit 'threat' designation. Option B overreacts—the metal mounts and teaspoon are described as \"normal passenger items\" and not annotated as threats; object_count=1 confirms no additional threats. Option C is invalid as the image is analyzable and annotated. Only D is consistent with both the threat classification and the occlusion detail.",
+  "answer": "D",
+  "metadata": {
+    "case_id": 9,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "risk_assessment",
+      "decision",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Nail Cutter",
+    "threat_level": "threat"
+  }
+}

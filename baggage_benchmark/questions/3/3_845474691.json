@@ -1,0 +1,30 @@
+{
+  "thoughts": "The question must be difficult, require precise use of provided metadata (not external knowledge), and involve classification, enumeration, or reasoning. The case specifies two annotated objects: Explosive and Battery. The caption and figure reference an improvised explosive device (IED) aligned horizontally, with metal mounts and a metallic egg beater—but crucially, only two objects are *annotated* (Explosive, Battery). The IED is described as the central threat, and the annotations confirm Explosive is one object (bounding box 174–448, 122–231), while Battery is a second (325–378, 125–160), fully contained within the Explosive bounding box (x: 325–378 ⊂ 174–448; y: 125–160 ⊂ 122–231), indicating the Battery is part of the IED assembly. The diagnosis and labels both list \"Battery, Explosive\", confirming two distinct labeled components. A challenging question could ask for the *minimum number of annotated threat objects*, where “threat object” must be interpreted strictly via label semantics: “Explosive” is explicitly a threat; “Battery” is not inherently a threat but here is co-located and part of the IED—however, per rule 2, we cannot infer threat status beyond explicit labels. The security category for “Battery” is non-threat unless labeled otherwise; only “Explosive” is labeled as threat. So enumeration of *threat* objects = 1. But the question must be tricky: perhaps asking about total annotated objects vs. threat-classified ones. Let’s construct a question that forces careful reading of *labels* vs. *diagnosis* vs. *object_count*. Option E could be “2 annotated objects, only 1 classified as threat”, which is correct. But need 6 options, including plausible distractors using the caption’s mention of “metal mounts” and “egg beater” (which are *not* annotated). So distractors can falsely claim those are annotated or threaten classification.",
+  "question": "Based on the provided testray case metadata and Figure 1a, which statement is objectively verifiable regarding the annotated objects and their security classification?\n\nA) Three objects are annotated: Explosive, Battery, and Metal Mount  \nB) The metallic egg beater is labeled as a threat in the annotations  \nC) Both annotated objects (Battery and Explosive) are classified as threats per the diagnosis field  \nD) The Explosive annotation fully encloses the Battery annotation, implying the Battery is a subcomponent of the IED  \nE) There are exactly two annotated objects, but only the Explosive is classified as a threat  \nF) Object count is 3 because the caption mentions “metal mounts, a metallic egg beater, and other normal items” in addition to the IED",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "The metadata explicitly states object_count = 2, and annotations list exactly two entries: label=Explosive and label=Battery. The diagnosis and labels fields list \"Battery, Explosive\" but do not assign threat status to Battery—only the history states the sample is from class 'Class 1_Explosive' with threat level 'threat', referring to the *sample*, not each component. Per rule 2, we cannot infer threat status for Battery unless explicitly labeled as such; only \"Explosive\" is a threat label. Option D describes spatial containment (Battery bbox inside Explosive bbox), which is numerically true (x_min=325 > 174, x_max=378 < 448; y_min=125 > 122, y_max=160 < 231), but the question asks for *objectively verifiable* statements *regarding annotated objects and security classification*—D makes an interpretive claim (“implying the Battery is a subcomponent of the IED”) which goes beyond verifiable metadata (the case does not state implication or relationship, only coordinates). Thus D is not strictly verifiable per rule 4. Option E is fully verifiable: two annotated objects (per object_count and annotations), and only “Explosive” is a threat-classified label (history says sample is threat, but classification per object is only explicit for Explosive; Battery is not labeled threat). The diagnosis field lists both terms but does not specify security category per object—only the history gives sample-level threat. Since the question asks about *annotated objects* and *their* security classification, and no annotation marks Battery as threat, E is correct. Options A, B, C, F all introduce unannotated items or incorrect",
+  "answer": null,
+  "metadata": {
+    "case_id": 3,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "classification",
+      "enumeration",
+      "reasoning"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

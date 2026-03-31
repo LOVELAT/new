@@ -1,0 +1,38 @@
+{
+    "version": "3.16.7",
+    "flags": {},
+    "shapes": [
+        {
+            "label": "3D printed gun",
+            "line_color": null,
+            "fill_color": null,
+            "points": [
+                [
+                    125,
+                    304
+                ],
+                [
+                    314,
+                    427
+                ]
+            ],
+            "shape_type": "rectangle",
+            "flags": {}
+        }
+    ],
+    "lineColor": [
+        255,
+        0,
+        127,
+        128
+    ],
+    "fillColor": [
+        255,
+        0,
+        0,
+        128
+    ],
+    "imagePath": "3DGun01_B2_L1_C1_Loc1_phi1_th1_4.jpg",
+    "imageHeight": 484,
+    "imageWidth": 461
+}
