@@ -32,19 +32,32 @@ SYSTEM_PROMPT = (
 
 CATEGORIES_META = {
     "detection": "Analyze the X-ray image, first determining whether prohibited items are present, and if so, further classifying them into security categories.",
-    "Counting": "Count target objects based on annotations.",
+    "counting": "Count target objects based on annotations.",
     "localization": "Determine object location based on bounding-box coordinates.",
     "relationship": "Reason about overlap, occlusion relation between objects.",
     "risk_assessment": "Assess operational risk level from object combinations.",
     "decision": "Choose the most appropriate screening follow-up action.",
-    "reasoning": "Explain the rationale using only the provided case evidence.",
+    "explanation": "Explain the rationale using only the provided case evidence.",
 }
 
+DECISION_ACTIONS = [
+    "Allow bag to pass",
+    "Quick visual check",
+    "Short operator review",
+    "Secondary X-ray scan",
+    "Detailed manual inspection",
+    "Swab for trace detection",
+    "Call supervisor",
+    "Open and itemize contents",
+    "Isolate bag for security team",
+    "Evacuate area and call bomb squad",
+]
+
 CATEGORY_COMBINATIONS = [
-    ["detection", "localization", "reasoning"],
-    ["detection", "Counting", "reasoning"],
-    ["localization", "relationship", "reasoning"],
-    ["detection", "risk_assessment", "decision", "reasoning"],
+    ["detection", "localization", "explanation"],
+    ["detection", "counting", "explanation"],
+    ["localization", "relationship", "explanation"],
+    ["detection", "risk_assessment", "decision", "explanation"],
 ]
 
 DEFAULT_SECTIONS = [
@@ -93,6 +106,14 @@ class Question:
         category_descriptions = "\n".join(
             f"- {name}: {desc}" for name, desc in CATEGORIES_META.items() if name in self.categories
         )
+        decision_constraint = ""
+        if "decision" in self.categories:
+            decision_list = "\n".join(f"- {action}" for action in DECISION_ACTIONS)
+            decision_constraint = (
+                "\nAdditional rule for decision:\n"
+                "6. The follow-up action must be chosen from the list below (use the exact wording):\n"
+                f"{decision_list}\n"
+            )
 
         return f"""
 You must follow these rules:
@@ -101,6 +122,7 @@ You must follow these rules:
 3. The question must explicitly mention referenced figure ids.
 4. The answer must be objectively verifiable from provided fields.
 5. Produce a difficult multiple-choice question with six options A-F.
+{decision_constraint}
 
 Target capabilities:
 {category_descriptions}
