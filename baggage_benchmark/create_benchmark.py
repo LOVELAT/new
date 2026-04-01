@@ -31,11 +31,10 @@ SYSTEM_PROMPT = (
 )
 
 CATEGORIES_META = {
-    "detection": "Identify whether prohibited objects are present in the X-ray.",
-    "classification": "Classify the security category (threat / non-threat or item type).",
+    "detection": "Analyze the X-ray image, first determining whether prohibited items are present, and if so, further classifying them into security categories.",
     "Counting": "Count target objects based on annotations.",
     "localization": "Determine object location based on bounding-box coordinates.",
-    "relationship": "Reason about overlap, occlusion, or spatial relation between objects.",
+    "relationship": "Reason about overlap, occlusion relation between objects.",
     "risk_assessment": "Assess operational risk level from object combinations.",
     "decision": "Choose the most appropriate screening follow-up action.",
     "reasoning": "Explain the rationale using only the provided case evidence.",
@@ -43,9 +42,9 @@ CATEGORIES_META = {
 
 CATEGORY_COMBINATIONS = [
     ["detection", "localization", "reasoning"],
-    ["classification", "Counting", "reasoning"],
+    ["detection", "Counting", "reasoning"],
     ["localization", "relationship", "reasoning"],
-    ["classification", "risk_assessment", "decision", "reasoning"],
+    ["detection", "risk_assessment", "decision", "reasoning"],
 ]
 
 DEFAULT_SECTIONS = [
