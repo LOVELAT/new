@@ -131,7 +131,7 @@ Case context:
 {self.case_content}
 
 Return exactly in this format:
-THOUGHTS: [Reasoning plan for the agent]
+THOUGHTS: [Reasoning plan in 2-3 short sentences max]
 QUESTION: [Full question with options A-F]
 FIGURES: [List like ["Figure 1a"]]
 EXPLANATION: [How the answer is verifiable from case metadata]
@@ -267,7 +267,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", default="qwen3-vl-plus", help="LLM model name")
     parser.add_argument("--temperature", type=float, default=0.4)
     parser.add_argument("--top_p", type=float, default=0.95)
-    parser.add_argument("--max_tokens", type=int, default=1000)
+    parser.add_argument("--max_tokens", type=int, default=2000)
     parser.add_argument("--max_cases", type=int, default=None)
     parser.add_argument(
         "--threat_level",

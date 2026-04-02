@@ -1,0 +1,30 @@
+{
+  "thoughts": "The case contains 4 X-ray views (Figures 1a–1d), each with 2 annotated objects: one Explosive and one Battery. Annotations list 8 total bounding boxes (4 Explosive, 4 Battery), matching 2 per view. The object_code \"Explosive0\" and consistent bag/layer/camera/location metadata across all frames indicate a single explosive object imaged from multiple angles. The question must test precise localization and classification using only provided coordinates and figure captions—no inference beyond metadata.",
+  "question": "In Figure 1a, the explosive device is described as positioned horizontally in the middle of a travel bag, with metal mounts and a metallic egg beater. Based on the provided annotation coordinates for view 1 (frame=1), which bounding box corresponds to the explosive device—not the battery—and what is its exact coordinate range?  \nA) x_min=220.0, y_min=136.0, x_max=275.0, y_max=168.0  \nB) x_min=174.0, y_min=136.0, x_max=206.0, y_max=194.0  \nC) x_min=147.0, y_min=65.0, x_max=433.0, y_max=168.0  \nD) x_min=325.0, y_min=125.0, x_max=378.0, y_max=160.0  \nE) x_min=176.0, y_min=83.0, x_max=304.0, y_max=299.0  \nF) x_min=184.0, y_min=214.0, x_max=218.0, y_max=265.0",
+  "figures": "[\"Figure 1a\"]",
+  "explanation": "Per the annotations list, the first two entries (1 and 2) correspond to view 1 (frame=1), as the per_view_tokens show frame=1 maps to image_filename ending in \"_1.jpg\", and the raw_tokens sequence implies sequential annotation assignment per view. Annotation #1 is labeled \"Explosive\" with coordinates (147.0, 65.0, 433.0, 168.0); annotation #2 is \"Battery\". The figure caption for 1a specifies the explosive is horizontal and in the middle—coordinates in option C span horizontally (x from 147 to 433) and vertically (y from 65 to 168), consistent with a central horizontal placement, whereas the battery (option A) is narrower and higher in y-range, matching typical battery shape and position relative to explosive in such setups. All other options belong to frames 2–4 (annotations 3–8), not frame 1.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "localization",
+      "explanation"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}
