@@ -1,0 +1,30 @@
+{
+  "thoughts": "The annotations list 8 bounding boxes across 4 views (2 per view), with alternating Explosive and Battery labels. To determine which view shows the Battery *fully enclosed* within the Explosive’s bounding box, we must compare coordinates per view. View 1 has annotations 1 (Explosive) and 2 (Battery); check if Battery bbox ⊆ Explosive bbox. Only in View 1 does the Battery (x:220–275, y:136–168) lie entirely within Explosive (x:147–433, y:65–168). Other views show partial or no containment.",
+  "question": "In which X-ray view is the Battery object completely spatially contained within the Explosive object’s bounding box, based on the provided annotation coordinates?  \nA) View 1  \nB) View 2  \nC) View 3  \nD) View 4  \nE) None of the views  \nF) All four views",
+  "figures": "[\"Figure 1a\", \"Figure 1b\", \"Figure 1c\", \"Figure 1d\"]",
+  "explanation": "In View 1, Explosive annotation 1 has bbox (x_min=147, y_min=65, x_max=433, y_max=168) and Battery annotation 2 has bbox (x_min=220, y_min=136, x_max=275, y_max=168). Since 147 ≤ 220 < 275 ≤ 433 and 65 ≤ 136 ≤ 168 = 168, the Battery is fully contained. In View 2, Battery (174–206, 136–194) extends beyond Explosive (176–304, 83–299) in y (194 > 299? No—194 < 299, but x_min=174 < 176, so not fully contained). Similarly, Views 3 and 4 show non-contained relationships per coordinates. Only View 1 satisfies full containment.",
+  "answer": "A",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "localization",
+      "relationship",
+      "explanation"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

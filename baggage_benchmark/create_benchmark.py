@@ -134,7 +134,7 @@ Return exactly in this format:
 THOUGHTS: [Reasoning plan in 2-3 short sentences max]
 QUESTION: [Full question with options A-F]
 FIGURES: [List like ["Figure 1a"]]
-EXPLANATION: [How the answer is verifiable from case metadata]
+EXPLANATION: [1-3 short sentences; cite only the specific fields/values that verify the answer]
 ANSWER: [Correct option letter, e.g. "C"]
 """.strip()
 

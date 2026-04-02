@@ -1,0 +1,31 @@
+{
+  "thoughts": "The case explicitly identifies two object types—Battery and Explosive—in all four views, with annotations confirming co-location of explosive material and batteries. Figures 1a–1d consistently describe an improvised explosive device with metal mounts and a metallic egg beater, indicating a functional IED assembly. Presence of both explosive and battery (power source) confirms a high-risk threat requiring immediate escalation.",
+  "question": "Based on the X-ray evidence in Figures 1a–1d, which shows an improvised explosive device with metal mounts, a metallic egg beater, and co-located batteries across all four views, what is the most appropriate follow-up action given the confirmed presence of an explosive device paired with a power source?  \nA) Allow bag to pass  \nB) Quick visual check  \nC) Short operator review  \nD) Secondary X-ray scan  \nE) Detailed manual inspection  \nF) Evacuate area and call bomb squad",
+  "figures": "[\"Figure 1a\", \"Figure 1b\", \"Figure 1c\", \"Figure 1d\"]",
+  "explanation": "The diagnosis and labels confirm \"Explosive\" and \"Battery\" as present; annotations 1–8 show overlapping or adjacent bounding boxes for both object types across all frames. Figures 1a–1d explicitly describe an improvised explosive device with metal mounts and a metallic egg beater—indicating a functional IED. Per standard security protocol for confirmed IEDs with power sources, the highest-tier response is required.",
+  "answer": "F",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "risk_assessment",
+      "decision",
+      "explanation"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

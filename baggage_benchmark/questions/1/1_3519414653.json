@@ -1,0 +1,30 @@
+{
+  "thoughts": "The case contains 4 X-ray views (frames 1–4), each with 2 annotated objects (total 8 annotations), alternating between Explosive and Battery labels. The object_code is consistently \"Explosive0\", and the diagnosis confirms both Battery and Explosive are present. The question must test precise counting and classification using only provided metadata, not visual interpretation.",
+  "question": "Based on the provided annotations and metadata for the testray case, how many distinct explosive objects are annotated across all four X-ray views (Figures 1a–1d), and what is their consistent object_code?  \nA) 1 explosive object, object_code = \"Explosive\"  \nB) 2 explosive objects, object_code = \"Explosive0\"  \nC) 4 explosive objects, object_code = \"Explosive0\"  \nD) 1 explosive object, object_code = \"Explosive0\"  \nE) 3 explosive objects, object_code = \"Battery\"  \nF) 4 explosive objects, object_code = \"B2\"",
+  "figures": "[\"Figure 1a\", \"Figure 1b\", \"Figure 1c\", \"Figure 1d\"]",
+  "explanation": "There are exactly 4 annotations with label=\"Explosive\" (annotations #1, #3, #5, #7). All share the same object_code \"Explosive0\" per the features field, and the group_stem confirms a single object instance (\"Explosive0_B2_L1_C1_Loc1_phi1_th1\") across all 4 views. The diagnosis and labels fields also list \"Explosive\" as present.",
+  "answer": "D",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "counting",
+      "explanation"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}

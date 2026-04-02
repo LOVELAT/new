@@ -1,0 +1,30 @@
+{
+  "thoughts": "The case contains exactly two object types—Battery and Explosive—with 4 views and 8 annotations (2 per view). The figure captions consistently describe a single horizontally positioned improvised explosive device with metal mounts and a metallic egg beater, but no mention of batteries. However, the annotations explicitly list both Explosive and Battery objects across all views. The challenge is to identify which option correctly reflects the *number and type* of annotated objects *per view*, using only provided metadata—not visual interpretation.",
+  "question": "Based on the provided annotations and case metadata for the testray sample (Class 1_Explosive, threat level 'threat'), how many distinct object labels are annotated per X-ray view, and what are they?  \nA) One object: Explosive  \nB) One object: Battery  \nC) Two objects: Explosive and Battery  \nD) Three objects: Explosive, Battery, and Metal Mount  \nE) Two objects: Explosive and Metallic Egg Beater  \nF) Four objects: Explosive, Battery, Metal Mount, and Metallic Egg Beater",
+  "figures": "[\"Figure 1a\", \"Figure 1b\", \"Figure 1c\", \"Figure 1d\"]",
+  "explanation": "The `annotations` field lists exactly 8 entries across 4 views, with 2 annotations per view (e.g., views 1–4 each have one Explosive and one Battery annotation). The `labels` field confirms only \"Battery\" and \"Explosive\" are present. No annotation or metadata mentions \"Metal Mount\" or \"Metallic Egg Beater\" as labeled objects—those appear only in figure captions as contextual descriptors, not as annotated labels. Thus, per view, there are exactly two annotated object labels: Explosive and Battery.",
+  "answer": "C",
+  "metadata": {
+    "case_id": 1,
+    "type": "multiple choice (A/B/C/D/E/F)",
+    "difficulty": "complex",
+    "categories": [
+      "detection",
+      "localization",
+      "explanation"
+    ],
+    "sections": [
+      "history",
+      "image_finding",
+      "diagnosis",
+      "labels",
+      "object_count",
+      "features",
+      "annotations",
+      "figures"
+    ],
+    "source_dataset": "testray",
+    "class_name": "Explosive",
+    "threat_level": "threat"
+  }
+}
