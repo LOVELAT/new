@@ -9,7 +9,11 @@ from typing import Callable, Dict, Iterable, Optional
 
 from langchain_core.tools import BaseTool
 
-TOOL_BUILDERS: Dict[str, Callable[..., BaseTool]] = {}
+from .cspcl_tool import create_cspcl_detector_tool
+
+TOOL_BUILDERS: Dict[str, Callable[..., BaseTool]] = {
+    "cspcl_detector": create_cspcl_detector_tool,
+}
 
 
 def build_tools(
@@ -18,8 +22,7 @@ def build_tools(
 ) -> Dict[str, BaseTool]:
     """Instantiate only the requested tools.
 
-    The registry is intentionally empty for now, matching the current
-    requirement that the toolbar should stay blank.
+    Unknown tool names are ignored so the caller can request optional tools.
     """
 
     if tools_to_use is None:
@@ -37,4 +40,4 @@ def build_tools(
     return tools
 
 
-__all__ = ["TOOL_BUILDERS", "build_tools"]
+__all__ = ["TOOL_BUILDERS", "build_tools", "create_cspcl_detector_tool"]

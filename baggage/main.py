@@ -5,16 +5,8 @@ import warnings
 from pathlib import Path
 from typing import Dict, Iterable, Optional, Tuple
 
-try:
-    from dotenv import load_dotenv
-except ImportError:  # pragma: no cover
-    load_dotenv = None
-
-try:
-    from transformers import logging as transformers_logging
-except ImportError:  # pragma: no cover
-    transformers_logging = None
-
+from dotenv import load_dotenv
+from transformers import logging as transformers_logging
 from langchain_core.tools import BaseTool
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
@@ -24,10 +16,8 @@ from .tools import build_tools
 from .utils import load_prompts_from_file
 
 warnings.filterwarnings("ignore")
-if transformers_logging is not None:
-    transformers_logging.set_verbosity_error()
-if load_dotenv is not None:
-    _ = load_dotenv()
+transformers_logging.set_verbosity_error()
+_ = load_dotenv()
 
 
 def initialize_agent(
@@ -74,7 +64,7 @@ def initialize_agent(
 if __name__ == "__main__":
     from .interface import create_demo
 
-    selected_tools: list[str] = []
+    selected_tools: list[str] = ["cspcl_detector"]
 
     openai_kwargs: Dict[str, object] = {}
     if api_key := os.getenv("OPENAI_API_KEY"):
