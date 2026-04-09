@@ -93,6 +93,14 @@ class CSPCLDetectorInput(BaseModel):
         default=None,
         description="Optional explicit path for the visualization image output.",
     )
+    save_json: bool = Field(
+        default=True,
+        description="Whether to save the structured detection result to a JSON file.",
+    )
+    json_output_path: Optional[str] = Field(
+        default=None,
+        description="Optional explicit path for the JSON output file.",
+    )
     class_names: Optional[List[str]] = Field(
         default=None,
         description="Optional class names override when the checkpoint does not contain dataset metadata.",
@@ -145,6 +153,8 @@ class CSPCLDetectorTool(BaseTool):
         device: Optional[str] = None,
         return_visualization: bool = True,
         visualization_path: Optional[str] = None,
+        save_json: bool = True,
+        json_output_path: Optional[str] = None,
         class_names: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         image = Path(image_path).expanduser().resolve()
@@ -202,6 +212,11 @@ class CSPCLDetectorTool(BaseTool):
             vis_path = self._resolve_visualization_path(image, visualization_path)
             self._save_visualization(image, output.get("detections", []), vis_path)
             output["visualization_path"] = str(vis_path)
+
+        if save_json:
+            json_path = self._resolve_json_output_path(image, json_output_path)
+            self._save_json_output(output, json_path)
+            output["json_output_path"] = str(json_path)
 
         return output
 
@@ -446,6 +461,15 @@ class CSPCLDetectorTool(BaseTool):
         timestamp = time.strftime("%Y%m%d_%H%M%S")
         return self._temp_dir / f"{image_path.stem}_cspcl_{timestamp}{image_path.suffix}"
 
+    def _resolve_json_output_path(self, image_path: Path, explicit_path: Optional[str]) -> Path:
+        if explicit_path:
+            path = Path(explicit_path).expanduser().resolve()
+            path.parent.mkdir(parents=True, exist_ok=True)
+            return path
+
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        return self._temp_dir / f"{image_path.stem}_cspcl_{timestamp}.json"
+
     @staticmethod
     def _save_visualization(image_path: Path, detections: Sequence[Dict[str, Any]], output_path: Path) -> None:
         from PIL import Image, ImageDraw
@@ -462,6 +486,13 @@ class CSPCLDetectorTool(BaseTool):
             draw.text((bbox["x_min"] + 4, bbox["y_min"] + 4), f"{label} {score:.2f}", fill="yellow")
 
         image.save(output_path)
+
+    @staticmethod
+    def _save_json_output(payload: Dict[str, Any], output_path: Path) -> None:
+        output_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
     @staticmethod
     def _get_mmdet_api(name: str) -> Any:
