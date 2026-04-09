@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib
+import json
 import os
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -9,6 +11,9 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field, PrivateAttr
+
+RUNNER_JSON_PREFIX = "__CSPCL_JSON__="
+RUNNER_LOG_PREVIEW_CHARS = 1200
 
 
 DATASET_CLASS_MAPPINGS: Dict[str, Tuple[str, ...]] = {
@@ -108,6 +113,8 @@ class CSPCLDetectorTool(BaseTool):
     _default_config: Optional[Path] = PrivateAttr(default=None)
     _default_checkpoint: Optional[Path] = PrivateAttr(default=None)
     _model_cache: Dict[Tuple[str, str, str], Any] = PrivateAttr(default_factory=dict)
+    _external_python: Optional[Path] = PrivateAttr(default=None)
+    _runner_script: Path = PrivateAttr()
 
     def __init__(
         self,
@@ -116,6 +123,7 @@ class CSPCLDetectorTool(BaseTool):
         device: str = "cpu",
         default_config: str | Path | None = None,
         default_checkpoint: str | Path | None = None,
+        python_path: str | Path | None = None,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
@@ -125,6 +133,8 @@ class CSPCLDetectorTool(BaseTool):
         self._default_device = device
         self._default_config = Path(default_config).resolve() if default_config else None
         self._default_checkpoint = Path(default_checkpoint).resolve() if default_checkpoint else None
+        self._external_python = Path(python_path).resolve() if python_path else None
+        self._runner_script = Path(__file__).resolve().with_name("cspcl_runner.py")
 
     def _run(
         self,
@@ -151,36 +161,46 @@ class CSPCLDetectorTool(BaseTool):
 
         inference_device = device or self._default_device
 
-        try:
-            model = self._load_model(config=config, checkpoint=checkpoint, device=inference_device)
-            detections = self._predict(
-                model=model,
+        if self._external_python is not None:
+            output = self._run_external(
                 image_path=image,
+                config_path=config,
+                checkpoint_path=checkpoint,
                 score_threshold=score_threshold,
+                device=inference_device,
                 class_names=class_names,
             )
-        except Exception as exc:
-            return {
-                "error": f"CSPCL inference failed: {exc}",
+        else:
+            try:
+                model = self._load_model(config=config, checkpoint=checkpoint, device=inference_device)
+                detections = self._predict(
+                    model=model,
+                    image_path=image,
+                    score_threshold=score_threshold,
+                    class_names=class_names,
+                )
+            except Exception as exc:
+                return {
+                    "error": f"CSPCL inference failed: {exc}",
+                    "image_path": str(image),
+                    "config_path": str(config),
+                    "checkpoint_path": str(checkpoint),
+                    "device": inference_device,
+                }
+
+            output = {
                 "image_path": str(image),
                 "config_path": str(config),
                 "checkpoint_path": str(checkpoint),
                 "device": inference_device,
+                "score_threshold": score_threshold,
+                "num_detections": len(detections),
+                "detections": detections,
             }
-
-        output: Dict[str, Any] = {
-            "image_path": str(image),
-            "config_path": str(config),
-            "checkpoint_path": str(checkpoint),
-            "device": inference_device,
-            "score_threshold": score_threshold,
-            "num_detections": len(detections),
-            "detections": detections,
-        }
 
         if return_visualization:
             vis_path = self._resolve_visualization_path(image, visualization_path)
-            self._save_visualization(image, detections, vis_path)
+            self._save_visualization(image, output.get("detections", []), vis_path)
             output["visualization_path"] = str(vis_path)
 
         return output
@@ -238,6 +258,93 @@ class CSPCLDetectorTool(BaseTool):
 
         workspace_candidate = (Path.cwd() / path_value).resolve()
         return workspace_candidate
+
+    def _run_external(
+        self,
+        image_path: Path,
+        config_path: Path,
+        checkpoint_path: Path,
+        score_threshold: float,
+        device: str,
+        class_names: Optional[Sequence[str]] = None,
+    ) -> Dict[str, Any]:
+        if self._external_python is None:
+            raise RuntimeError("External CSPCL python interpreter is not configured.")
+        if not self._external_python.exists():
+            return {"error": f"CSPCL python not found: {self._external_python}"}
+        if not self._runner_script.exists():
+            return {"error": f"CSPCL runner script not found: {self._runner_script}"}
+
+        command = [
+            str(self._external_python),
+            str(self._runner_script),
+            "--repo-root",
+            str(self._repo_root),
+            "--image-path",
+            str(image_path),
+            "--config-path",
+            str(config_path),
+            "--checkpoint-path",
+            str(checkpoint_path),
+            "--score-threshold",
+            str(score_threshold),
+            "--device",
+            device,
+        ]
+        if class_names:
+            command.extend(["--class-names-json", json.dumps(list(class_names), ensure_ascii=True)])
+
+        completed = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            cwd=str(Path(__file__).resolve().parents[2]),
+            check=False,
+        )
+
+        payload: Optional[Dict[str, Any]] = None
+        stdout_lines = completed.stdout.splitlines()
+        for line in reversed(stdout_lines):
+            if line.startswith(RUNNER_JSON_PREFIX):
+                payload = json.loads(line[len(RUNNER_JSON_PREFIX) :])
+                break
+
+        runner_logs = "\n".join(
+            line for line in stdout_lines if not line.startswith(RUNNER_JSON_PREFIX)
+        ).strip()
+        stderr_logs = completed.stderr.strip()
+
+        if payload is None:
+            details = "\n".join(part for part in (runner_logs, stderr_logs) if part)
+            return {
+                "error": "CSPCL external runner did not return structured output.",
+                "image_path": str(image_path),
+                "config_path": str(config_path),
+                "checkpoint_path": str(checkpoint_path),
+                "device": device,
+                "runner_logs": details,
+                "return_code": completed.returncode,
+            }
+
+        if runner_logs:
+            payload["runner_stdout"] = self._truncate_log(runner_logs)
+            if "do not match exactly" in runner_logs:
+                payload["model_warning"] = (
+                    "Checkpoint and config do not match exactly. Inference still ran, "
+                    "but the current config may not be the exact training config."
+                )
+        if stderr_logs and completed.returncode != 0:
+            payload["runner_stderr"] = self._truncate_log(stderr_logs)
+        payload["return_code"] = completed.returncode
+        return payload
+
+    @staticmethod
+    def _truncate_log(text: str) -> str:
+        if len(text) <= RUNNER_LOG_PREVIEW_CHARS:
+            return text
+        return f"{text[:RUNNER_LOG_PREVIEW_CHARS]}...(truncated)"
 
     def _load_model(self, config: Path, checkpoint: Path, device: str) -> Any:
         cache_key = (str(config), str(checkpoint), device)
@@ -373,6 +480,7 @@ def create_cspcl_detector_tool(
     repo_root: str | Path | None = None,
     default_config: str | Path | None = None,
     default_checkpoint: str | Path | None = None,
+    python_path: str | Path | None = None,
     **_: Any,
 ) -> CSPCLDetectorTool:
     workspace_root = Path(__file__).resolve().parents[2]
@@ -382,16 +490,28 @@ def create_cspcl_detector_tool(
         else (workspace_root / "CSPCL" / "CSPCL").resolve()
     )
 
-    fallback_config = resolved_repo_root / "configs" / "MMCLv2" / "C-DINO_r50_pidray_test100.py"
+    fallback_config = resolved_repo_root / "configs" / "dino" / "AO-DETR-BASE_r50_pixray.py"
+    fallback_checkpoint = workspace_root / "CSPCL" / "AO-DETR_r50_PIXray320.pth"
+    env_python_path = os.getenv("CSPCL_PYTHON_PATH")
     env_default_config = os.getenv("CSPCL_CONFIG_PATH")
     env_default_checkpoint = os.getenv("CSPCL_CHECKPOINT_PATH")
+    detected_python = (
+        Path(python_path).resolve()
+        if python_path is not None
+        else Path(env_python_path).resolve()
+        if env_python_path
+        else (Path("F:/Anaconda/envs/cspcl39/python.exe").resolve())
+    )
 
     return CSPCLDetectorTool(
         repo_root=resolved_repo_root,
         temp_dir=temp_dir,
         device=device,
         default_config=default_config or env_default_config or (fallback_config if fallback_config.exists() else None),
-        default_checkpoint=default_checkpoint or env_default_checkpoint,
+        default_checkpoint=default_checkpoint
+        or env_default_checkpoint
+        or (str(fallback_checkpoint) if fallback_checkpoint.exists() else None),
+        python_path=str(detected_python) if detected_python.exists() else None,
     )
 
 
