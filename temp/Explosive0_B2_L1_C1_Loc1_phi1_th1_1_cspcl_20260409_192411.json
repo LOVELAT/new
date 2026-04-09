@@ -1,0 +1,47 @@
+{
+  "image_path": "F:\\Project\\not project\\STCray_TrainSet\\Images\\Class 1_Explosive\\Explosive0_B2_L1_C1_Loc1_phi1_th1_1.jpg",
+  "config_path": "F:\\Project\\new\\CSPCL\\CSPCL\\configs\\dino\\AO-DETR-BASE_r50_pixray.py",
+  "checkpoint_path": "F:\\Project\\new\\CSPCL\\AO-DETR_r50_PIXray320.pth",
+  "device": "cpu",
+  "score_threshold": 0.3,
+  "num_detections": 3,
+  "detections": [
+    {
+      "label": "Saw_blade",
+      "label_id": 12,
+      "score": 0.687464,
+      "bbox": {
+        "x_min": 227.056,
+        "y_min": 144.494,
+        "x_max": 533.482,
+        "y_max": 172.083
+      }
+    },
+    {
+      "label": "Fireworks",
+      "label_id": 11,
+      "score": 0.675291,
+      "bbox": {
+        "x_min": 223.721,
+        "y_min": 129.702,
+        "x_max": 357.164,
+        "y_max": 224.565
+      }
+    },
+    {
+      "label": "Razor_blade",
+      "label_id": 13,
+      "score": 0.599374,
+      "bbox": {
+        "x_min": 186.519,
+        "y_min": 41.041,
+        "x_max": 237.867,
+        "y_max": 55.566
+      }
+    }
+  ],
+  "runner_stdout": "Loads checkpoint by local backend from path: F:\\Project\\new\\CSPCL\\AO-DETR_r50_PIXray320.pth\nThe model and loaded state dict do not match exactly\n\nunexpected key in source state_dict: label_embeddings.weight\n\nmissing keys in source state_dict: encoder.layers.0.ETB.conv1.0.weight, encoder.layers.0.ETB.conv1.0.bias, encoder.layers.0.ETB.conv1.1.weight, encoder.layers.0.ETB.conv1.1.bias, encoder.layers.0.ETB.reduce.0.weight, encoder.layers.0.ETB.reduce.0.bias, encoder.layers.0.ETB.reduce.1.weight, encoder.layers.0.ETB.reduce.1.bias, encoder.layers.0.ETB.Module_FSA_res.norm1.weight, encoder.layers.0.ETB.Module_FSA_res.norm1.bias, encoder.layers.0.ETB.Module_FSA_res.attn_S.temperature, encoder.layers.0.ETB.Module_FSA_res.attn_S.Q_linear.weight, encoder.layers.0.ETB.Module_FSA_res.attn_S.K_linear.weight, encoder.layers.0.ETB.Module_FSA_res.attn_S.V_linear.weight, encoder.layers.0.ETB.Module_FSA_res.attn_F.temperature, encoder.layers.0.ETB.Module_FSA_res.attn_F.project_out.weight, encoder.layers.0.ETB.Module_FSA_res.attn_F.weight.0.weight, encoder.layers.0.ETB.Module_FSA_res.attn_F.weight.0.bias, encoder.layers.0.ETB.Module_FSA_res.attn_F.weight.1.weight, encoder.layers.0.ETB.Module_FSA_re...(truncated)",
+  "model_warning": "Checkpoint and config do not match exactly. Inference still ran, but the current config may not be the exact training config.",
+  "return_code": 0,
+  "visualization_path": "F:\\Project\\new\\temp\\Explosive0_B2_L1_C1_Loc1_phi1_th1_1_cspcl_20260409_192411.jpg"
+}

@@ -326,10 +326,23 @@ class CSPCLDetectorTool(BaseTool):
                 payload = json.loads(line[len(RUNNER_JSON_PREFIX) :])
                 break
 
+
+         #completed.stdout 是 runner 的标准输出
+         # splitlines() 把它拆成多行
+         # 倒序遍历每一行
+         # 找到形如__CSPCL_JSON__={...}的那一行
+         # 去掉前缀 RUNNER_JSON_PREFIX
+         # 对后面的 JSON 字符串做 json.loads(...)
+         # 得到 Python 字典 payload
+
+
+
         runner_logs = "\n".join(
             line for line in stdout_lines if not line.startswith(RUNNER_JSON_PREFIX)
         ).strip()
         stderr_logs = completed.stderr.strip()
+
+        # 把普通日志和错误日志单独提出来
 
         if payload is None:
             details = "\n".join(part for part in (runner_logs, stderr_logs) if part)
@@ -342,6 +355,8 @@ class CSPCLDetectorTool(BaseTool):
                 "runner_logs": details,
                 "return_code": completed.returncode,
             }
+        
+        # 如果根本没拿到 JSON，就返回错误
 
         if runner_logs:
             payload["runner_stdout"] = self._truncate_log(runner_logs)
@@ -354,6 +369,16 @@ class CSPCLDetectorTool(BaseTool):
             payload["runner_stderr"] = self._truncate_log(stderr_logs)
         payload["return_code"] = completed.returncode
         return payload
+    
+         # payload["runner_stdout"]
+         # 保存 stdout 里的普通日志，但会先截断，避免太长
+         # model_warning
+         # 如果日志里出现 "do not match exactly"，说明权重和 config 不完全匹配
+         # 于是额外加一个更友好的警告字段
+         # payload["runner_stderr"]
+         # 如果 stderr 有内容且进程返回码不是 0，就把错误日志也加进去
+         # payload["return_code"]
+         # 记录子进程退出码，0 通常表示成功
 
     @staticmethod
     def _truncate_log(text: str) -> str:
@@ -488,13 +513,6 @@ class CSPCLDetectorTool(BaseTool):
         image.save(output_path)
 
     @staticmethod
-    def _save_json_output(payload: Dict[str, Any], output_path: Path) -> None:
-        output_path.write_text(
-            json.dumps(payload, ensure_ascii=False, indent=2),
-            encoding="utf-8",
-        )
-
-    @staticmethod
     def _get_mmdet_api(name: str) -> Any:
         module = importlib.import_module("mmdet.apis")
         return getattr(module, name)
@@ -533,6 +551,12 @@ def create_cspcl_detector_tool(
         if env_python_path
         else (Path("F:/Anaconda/envs/cspcl39/python.exe").resolve())
     )
+
+#解释器优先级
+# 代码里显式传的 python_path
+# 环境变量 CSPCL_PYTHON_PATH
+# 默认值 F:\Anaconda\envs\cspcl39\python.exe
+
 
     return CSPCLDetectorTool(
         repo_root=resolved_repo_root,
