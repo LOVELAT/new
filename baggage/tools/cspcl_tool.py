@@ -513,6 +513,13 @@ class CSPCLDetectorTool(BaseTool):
         image.save(output_path)
 
     @staticmethod
+    def _save_json_output(payload: Dict[str, Any], output_path: Path) -> None:
+        output_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+    @staticmethod
     def _get_mmdet_api(name: str) -> Any:
         module = importlib.import_module("mmdet.apis")
         return getattr(module, name)
