@@ -27,7 +27,7 @@ DEFAULT_OUTPUT_DIR = r"F:\Project\new\baggage_benchmark\questions"
 
 SYSTEM_PROMPT = (
     "You are an expert benchmark creation assistant for airport baggage X-ray analysis. "
-    "Create challenging, verifiable multiple-choice questions based strictly on provided metadata."
+    "Create challenging, verifiable single-choice questions based strictly on provided metadata."
 )
 
 CATEGORIES_META = {
@@ -121,7 +121,8 @@ You must follow these rules:
 2. Do not invent objects, labels, coordinates, or risks not present in the case.
 3. The question must explicitly mention referenced figure ids.
 4. The answer must be objectively verifiable from provided fields.
-5. Produce a difficult multiple-choice question with six options A-F.
+5. Produce a difficult single-choice question with six options A-F.
+6. There must be exactly one correct option.
 {decision_constraint}
 
 Target capabilities:
@@ -243,7 +244,7 @@ def generate_questions(
         case_data = dataset[case_id]
         for combo in tqdm(CATEGORY_COMBINATIONS, desc=f"Categories for case {case_id}", leave=False):
             q = Question(
-                type="multiple choice (A/B/C/D/E/F)",
+                type="single choice (A/B/C/D/E/F)",
                 difficulty="complex",
                 case_data=case_data,
                 categories=combo,
